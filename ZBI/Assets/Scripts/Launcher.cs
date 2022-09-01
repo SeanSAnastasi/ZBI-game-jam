@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 
 namespace GarticAI
@@ -21,6 +22,10 @@ namespace GarticAI
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         [SerializeField]
         private GameObject progressLabel;
+        [SerializeField]
+        private GameObject PlayerNameInput;
+        [SerializeField]
+        private GameObject RoomNameInput;
 
         #endregion
 
@@ -81,10 +86,25 @@ namespace GarticAI
             // we don't want to do anything.
             if (isConnecting)
             {
-                // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRandomRoom();
+                string roomName = RoomNameInput.GetComponent<TMP_InputField>().text;
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    PhotonNetwork.JoinRoom(roomName);
+                }
+                else
+                {
+                    PhotonNetwork.JoinRoom(PlayerNameInput.GetComponent<TMP_InputField>().text);
+                }
                 isConnecting = false;
             }
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnJoinRoomFailed() was called by PUN with message {0}", message);
+            string roomName = RoomNameInput.GetComponent<TMP_InputField>().text;
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -134,7 +154,17 @@ namespace GarticAI
             controlPanel.SetActive(false);
             if (PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.JoinRandomRoom();
+                isConnecting = true;
+                string roomName = RoomNameInput.GetComponent<TMP_InputField>().text;
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    PhotonNetwork.JoinRoom(roomName);
+                }
+                else
+                {
+                    PhotonNetwork.JoinRoom(PlayerNameInput.GetComponent<TMP_InputField>().text);
+                }
             }
             else
             {
