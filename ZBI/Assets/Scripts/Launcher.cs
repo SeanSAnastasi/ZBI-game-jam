@@ -152,6 +152,8 @@ namespace ZBI
         {
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+
+            PhotonNetwork.NickName = PlayerNameInput.GetComponent<TMP_InputField>().text;
             if (PhotonNetwork.IsConnected)
             {
                 isConnecting = true;
