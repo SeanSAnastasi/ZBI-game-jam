@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 270584523}
   - component: {fileID: 270584522}
   - component: {fileID: 270584521}
-  - component: {fileID: 270584520}
   m_Layer: 5
   m_Name: Room InputField
   m_TagString: Untagged
@@ -299,18 +298,6 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 0.5}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &270584520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270584518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb28d5b70627aa4fb581fec176ba2cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &270584521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,19 +377,7 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 270584520}
-        m_TargetAssemblyTypeName: Com.MyCompany.MyGame.PlayerNameInputField, Assembly-CSharp
-        m_MethodName: SetPlayerName
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -471,7 +446,6 @@ GameObject:
   - component: {fileID: 325668049}
   - component: {fileID: 325668048}
   - component: {fileID: 325668047}
-  - component: {fileID: 325668050}
   m_Layer: 5
   m_Name: Name InputField
   m_TagString: Untagged
@@ -579,19 +553,7 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 325668050}
-        m_TargetAssemblyTypeName: Com.MyCompany.MyGame.PlayerNameInputField, Assembly-CSharp
-        m_MethodName: SetPlayerName
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -648,18 +610,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325668045}
   m_CullTransparentMesh: 1
---- !u!114 &325668050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325668045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb28d5b70627aa4fb581fec176ba2cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &422567355
 GameObject:
   m_ObjectHideFlags: 0

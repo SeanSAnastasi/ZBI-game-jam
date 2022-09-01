@@ -9,40 +9,96 @@ namespace ZBI {
 
     public class PlayerList : MonoBehaviourPunCallbacks
     {
+        [SerializeField] private ListedPlayer _listedPlayer;
         [SerializeField] private Transform _content;
-        private List<Player> _playerList = new List<Player>();
+
+        private List<ListedPlayer> _playerList = new List<ListedPlayer>();
 
         public TextMeshProUGUI debugText;
 
-        public void UpdatePlayersList()
+        private void Awake()
         {
-            //Instantiate the prefab in the dynamic list
+            GetCurrentPlayersInRoom();
+        }
 
+        private void GetCurrentPlayersInRoom()
+        {
+            foreach (KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
+            {
+                AddListedPlayer(playerInfo.Value);
+            }
+        }
+
+        private void AddListedPlayer(Player player)
+        {
+            ListedPlayer listedPlayer = Instantiate(_listedPlayer, _content);
+            if (listedPlayer != null)
+            {
+                listedPlayer.SetListedPlayerInfo(player);
+                _playerList.Add(listedPlayer);
+            }
+        }
+
+        public void UpdatePlayersList(List<Player> playerList)
+        {
+
+            foreach (Transform child in _content)
+            {
+                Destroy(child.gameObject);
+            }
+
+            //Instantiate the prefab in the dynamic list
+            foreach (Player player in playerList)
+            {
+                //Added to the list
+                ListedPlayer listedPlayer = Instantiate(_listedPlayer, _content);
+                if (listedPlayer != null)
+                {
+                    listedPlayer.SetListedPlayerInfo(player);
+                }
+
+                Debug.Log(player.NickName);
+            }
         }
 
         #region PUN Callbacks
+
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            _playerList.Add(newPlayer);
+            AddListedPlayer(newPlayer);
+            debugText.text = newPlayer.NickName + " entered the room!";
+            //_playerList.Add(newPlayer);
+            //foreach (Player player in _playerList)
+            //{
+            //    Debug.Log(player);
+            //}
 
-            foreach (Player player in _playerList)
-            {
-                Debug.Log(player);
-                debugText.text = player.NickName + " entered the room!";
-            }
+            //UpdatePlayersList(_playerList);
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
         {
-            foreach (Player player in _playerList)
+
+            //Removed from the list
+            int index = _playerList.FindIndex(x => x.Player == otherPlayer);
+            if (index != -1)
             {
-                if (otherPlayer.UserId == player.UserId)
-                {
-                    _playerList.Remove(player);
-                    debugText.text = player.NickName + " left the room!";
-                }
+                Destroy(_playerList[index].gameObject);
+                _playerList.RemoveAt(index);
+                debugText.text = otherPlayer.NickName + " left the room!";
             }
+
+            //foreach (Player player in _playerList)
+            //{
+            //    if (otherPlayer.NickName == player.NickName)
+            //    {
+            //        _playerList.Remove(player);
+            //    }
+            //}
+
+            //UpdatePlayersList(_playerList);
         }
+
 
         #endregion
 

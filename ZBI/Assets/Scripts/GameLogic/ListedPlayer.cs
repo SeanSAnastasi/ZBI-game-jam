@@ -2,14 +2,18 @@ using UnityEngine;
 using TMPro;
 using Photon.Realtime;
 
-public class ListedPlayer : MonoBehaviour
+namespace ZBI
 {
-    [SerializeField] private TextMeshProUGUI _listedPlayerText;
-    public Player PlayerInfo { get; private set; }
 
-    public void SetListedPlayerInfo(Player playerInfo)
+    public class ListedPlayer : MonoBehaviour
     {
-        PlayerInfo = playerInfo;
-        _listedPlayerText.text = playerInfo.NickName;
+        [SerializeField] private TextMeshProUGUI _listedPlayerText;
+        public Player Player { get; private set; }
+
+        public void SetListedPlayerInfo(Player player)
+        {
+            Player = player;
+            _listedPlayerText.text = player.NickName;
+        }
     }
 }
