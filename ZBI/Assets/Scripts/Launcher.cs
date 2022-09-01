@@ -113,7 +113,7 @@ namespace GarticAI
 
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("Room");
+                PhotonNetwork.LoadLevel("Lobby");
             }
         }
 

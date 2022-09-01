@@ -855,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 670068845}
-  - component: {fileID: 670068844}
+  - component: {fileID: 670068846}
   m_Layer: 0
   m_Name: launcher
   m_TagString: Untagged
@@ -863,21 +863,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &670068844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 670068843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d146b14b10aea4cabc7c7773ecbfff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayersPerRoom: 4
-  controlPanel: {fileID: 1307293014}
-  progressLabel: {fileID: 1185716522}
 --- !u!4 &670068845
 Transform:
   m_ObjectHideFlags: 0
@@ -893,6 +878,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &670068846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670068843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea8cf078dbadac479a54661290fc901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxPlayersPerRoom: 4
+  controlPanel: {fileID: 1307293014}
+  progressLabel: {fileID: 1185716522}
 --- !u!1 &744823137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,7 +1791,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 670068844}
+      - m_Target: {fileID: 670068846}
         m_TargetAssemblyTypeName: GarticAI.Launcher, Assembly-CSharp
         m_MethodName: Connect
         m_Mode: 1
