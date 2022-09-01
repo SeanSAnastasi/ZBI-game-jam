@@ -1,6 +1,6 @@
 # ZBI-game-jam
 
-Welcome to the Zucchini Gallery!
+Welcome to the Diffusion Gallery!
 
 This is a special gallery where the guests inspire the art. There is just one problem, the gallerist forgot to put up the signs! Help the gallerist figure out who has inspired the art and put correct sign next to the painting.
 
