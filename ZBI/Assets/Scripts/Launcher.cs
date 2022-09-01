@@ -108,12 +108,9 @@ namespace GarticAI
             // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                Debug.Log("We load the 'Room' ");
-
-
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("Room");
+                PhotonNetwork.LoadLevel("Lobby");
             }
         }
 
