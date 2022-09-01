@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class NetworkedGameLogic : MonoBehaviourPunCallbacks
 {
@@ -12,7 +13,7 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     public SortedDictionary<Player, string> questions;
     public int currentQuestionIndex;
     public SortedDictionary<Player, string> prompts;
-    public SortedDictionary<Player, Sprite> GeneratedImages;
+    public SortedDictionary<Player, Sprite> GeneratedSprites;
 
     #region Public Methods
     public void StartGame()
@@ -27,6 +28,10 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     {
         KeyValuePair<Player, string> currentQuestion = questions.ToArray()[currentQuestionIndex];
         return currentQuestion;
+    }
+    public bool IsGenerationDone()
+    {
+        return GeneratedSprites.Count >= activePlayers.Length;
     }
 
     public void SendQuestionToMaster(string question)
@@ -60,6 +65,32 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     #endregion
 
     #region Private Methods
+
+    private void GenerateSprite(string prompt)
+    {
+
+    }
+
+    private void Download(string url, Player player)
+    {
+        StartCoroutine(LoadFromWeb(url, player));
+    }
+
+    IEnumerator LoadFromWeb(string url, Player player)
+    {
+        UnityWebRequest wr = new UnityWebRequest(url);
+        DownloadHandlerTexture texDl = new DownloadHandlerTexture(true);
+        wr.downloadHandler = texDl;
+        yield return wr.SendWebRequest();
+        if (wr.result == UnityWebRequest.Result.Success)
+        {
+            Texture2D t = texDl.texture;
+            Sprite sprite = Sprite.Create(t, new Rect(0, 0, t.width, t.height),
+                Vector2.zero, 1f);
+
+            GeneratedSprites.Add(player, sprite);
+        }
+    }
 
     [PunRPC]
     private void ReceiveQuestionFromClient(string question, Player client)
