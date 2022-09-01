@@ -893,6 +893,8 @@ MonoBehaviour:
   maxPlayersPerRoom: 4
   controlPanel: {fileID: 1307293014}
   progressLabel: {fileID: 1185716522}
+  PlayerNameInput: {fileID: 325668045}
+  RoomNameInput: {fileID: 270584518}
 --- !u!1 &744823137
 GameObject:
   m_ObjectHideFlags: 0
