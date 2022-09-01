@@ -4,7 +4,7 @@ using Photon.Realtime;
 using TMPro;
 
 
-namespace GarticAI
+namespace ZBI
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
