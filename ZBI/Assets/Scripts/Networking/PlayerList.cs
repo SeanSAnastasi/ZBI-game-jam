@@ -4,40 +4,41 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class PlayerList : MonoBehaviourPunCallbacks
-{
-    
-    public List<Player> playerList;
+namespace ZBI {
 
-    public void UpdatePlayersList()
+    public class PlayerList : MonoBehaviourPunCallbacks
     {
-        //Instantiate the prefab in the dynamic list
-    }
+        [SerializeField] private Transform _content;
+        public List<Player> playerList;
 
-    #region PUN Callbacks
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        playerList.Add(newPlayer);
-
-        foreach (Player player in playerList)
+        public void UpdatePlayersList()
         {
-            Debug.Log(player);
+            //Instantiate the prefab in the dynamic list
         }
-    }
 
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        foreach (Player player in playerList)
+        #region PUN Callbacks
+        public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            if(otherPlayer.UserId == player.UserId)
+            playerList.Add(newPlayer);
+
+            foreach (Player player in playerList)
             {
-                playerList.Remove(player);
+                Debug.Log(player);
             }
         }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            foreach (Player player in playerList)
+            {
+                if (otherPlayer.UserId == player.UserId)
+                {
+                    playerList.Remove(player);
+                }
+            }
+        }
+
+        #endregion
+
     }
-
-    #endregion
-
-
-
 }
