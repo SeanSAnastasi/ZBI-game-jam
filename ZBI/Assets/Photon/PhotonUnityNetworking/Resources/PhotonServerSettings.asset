@@ -44,6 +44,8 @@ MonoBehaviour:
   - SyncPrompts
   - SyncQuestions
   - SyncSprites
+  - ReceiveScoreFromClient
+  - SyncScores
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

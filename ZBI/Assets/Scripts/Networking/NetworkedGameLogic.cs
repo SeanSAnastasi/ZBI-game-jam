@@ -9,11 +9,18 @@ using UnityEngine.Networking;
 
 public class NetworkedGameLogic : MonoBehaviourPunCallbacks
 {
+    [HideInInspector]
     public Player[] activePlayers;
+    [HideInInspector]
     public SortedDictionary<Player, string> questions;
+    [HideInInspector]
     public int currentQuestionIndex;
+    [HideInInspector]
     public SortedDictionary<Player, string> prompts;
+    [HideInInspector]
     public SortedDictionary<Player, Sprite> GeneratedSprites;
+    [HideInInspector]
+    public SortedDictionary<Player, int> Scores;
 
     #region Public Methods
     public void StartGame()
@@ -44,6 +51,12 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     {
         PhotonView photonView = PhotonView.Get(this);
         photonView.RPC("ReceivePromptFromClient", RpcTarget.MasterClient, prompt);
+    }
+
+    public void SendScoreToMaster(int Score)
+    {
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("ReceiveScoreFromClient", RpcTarget.MasterClient, Score);
     }
 
     #endregion
@@ -107,12 +120,6 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void SyncQuestions(SortedDictionary<Player, string> questions)
-    {
-        this.questions = questions;
-    }
-
-    [PunRPC]
     private void ReceivePromptFromClient(string prompt, Player client)
     {
         if (!PhotonNetwork.IsMasterClient) return;
@@ -129,6 +136,25 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
+    private void ReceiveScoreFromClient(int score, Player client)
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        Scores.Add(client, score);
+
+        //TODO: Sync score with all clients
+
+        PhotonView photonView = PhotonView.Get(this);
+        photonView.RPC("SyncScores", RpcTarget.All, Scores);
+    }
+
+    [PunRPC]
+    private void SyncQuestions(SortedDictionary<Player, string> questions)
+    {
+        this.questions = questions;
+    }
+
+    [PunRPC]
     private void SyncPrompts(SortedDictionary<Player, string> prompts)
     {
         this.prompts = prompts;
@@ -138,6 +164,12 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     private void SyncSprites(SortedDictionary<Player, Sprite> GeneratedImages)
     {
         this.GeneratedSprites = GeneratedImages;
+    }
+
+    [PunRPC]
+    private void SyncScores(SortedDictionary<Player, int> Scores)
+    {
+        this.Scores = Scores;
     }
 
     #endregion
