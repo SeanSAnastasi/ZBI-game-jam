@@ -137,7 +137,7 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     [PunRPC]
     private void SyncSprites(SortedDictionary<Player, Sprite> GeneratedImages)
     {
-        this.GeneratedImages = GeneratedImages;
+        this.GeneratedSprites = GeneratedImages;
     }
 
     #endregion
