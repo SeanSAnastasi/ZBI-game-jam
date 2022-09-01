@@ -9,17 +9,20 @@ public class Leave : MonoBehaviourPunCallbacks
 
 
     //cashed
-    GameObject _roomText = null;
+    Transform _roomText;
 
     // Start is called before the first frame update
     void Start()
     {
-        _roomText = transform.Find("RoomText").gameObject;
+        _roomText = transform.parent.Find("RoomText");
 
-        _roomText.GetComponent<TMP_InputField>().text = PhotonNetwork.CurrentRoom.Name;
+        if (_roomText)
+        {
+            _roomText.gameObject.GetComponent<TextMeshProUGUI>().text = PhotonNetwork.CurrentRoom.Name;
+        }
     }
 
-    void OnLeave()
+    public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel("Launcher");
