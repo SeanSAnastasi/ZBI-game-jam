@@ -18,14 +18,14 @@ namespace ZBI
         private byte maxPlayersPerRoom = 4;
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
-        private GameObject controlPanel;
+        private GameObject controlPanel = null;
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         [SerializeField]
-        private GameObject progressLabel;
+        private GameObject progressLabel = null;
         [SerializeField]
-        private GameObject PlayerNameInput;
+        private GameObject PlayerNameInput = null;
         [SerializeField]
-        private GameObject RoomNameInput;
+        private GameObject RoomNameInput = null;
 
         #endregion
 
@@ -175,7 +175,31 @@ namespace ZBI
             }
         }
 
+        public void Connect(string roomName)
+        {
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
 
+            PhotonNetwork.LocalPlayer.NickName = PlayerNameInput.GetComponent<TMP_InputField>().text;
+            if (PhotonNetwork.IsConnected)
+            {
+                isConnecting = true;
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    PhotonNetwork.JoinRoom(roomName);
+                }
+                else
+                {
+                    PhotonNetwork.JoinRoom(PlayerNameInput.GetComponent<TMP_InputField>().text);
+                }
+            }
+            else
+            {
+                isConnecting = PhotonNetwork.ConnectUsingSettings();
+                PhotonNetwork.GameVersion = gameVersion;
+            }
+        }
         #endregion
 
 
