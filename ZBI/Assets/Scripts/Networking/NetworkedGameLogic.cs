@@ -32,6 +32,8 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         currentQuestionIndex = 0;
         prompts = new SortedDictionary<Player, string>();
         Debug.Log("Starting game!");
+
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
     public KeyValuePair<Player, string> GetCurrentQuestion()
