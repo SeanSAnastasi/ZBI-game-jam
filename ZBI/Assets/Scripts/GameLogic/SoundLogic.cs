@@ -7,17 +7,16 @@ public class SoundLogic : MonoBehaviour
     public List<AudioClip> sounds;
     public List<AudioSource> sources;
 
-    public void Awake()
+    public void Start()
     {
-        sources = new List<AudioSource>();
-        foreach(AudioClip sound in sounds)
+        foreach(AudioSource source in sources)
         {
-            sources.Add(new AudioSource());
+            source.clip = sounds[sources.IndexOf(source)];
         }
     }
 
     public void PlayButtonSound(int index)
     {
-        // sources[index].play
+        sources[index].Play();
     }
 }
