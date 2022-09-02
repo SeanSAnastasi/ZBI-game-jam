@@ -57,21 +57,21 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         photonView.RPC("ReceiveQuestionFromClient", RpcTarget.MasterClient, question, PhotonNetwork.LocalPlayer);
     }
 
-    public void SendQuestionPromptsToMaster(string prompt)
+    public void SendPromptsToMaster(string prompt)
     {
         PhotonView photonView = PhotonView.Get(this);
-        photonView.RPC("ReceivePromptFromClient", RpcTarget.MasterClient, prompt);
+        photonView.RPC("ReceivePromptFromClient", RpcTarget.MasterClient, prompt, PhotonNetwork.LocalPlayer);
     }
 
     public void SendScoreToMaster(int Score)
     {
         PhotonView photonView = PhotonView.Get(this);
-        photonView.RPC("ReceiveScoreFromClient", RpcTarget.MasterClient, Score);
+        photonView.RPC("ReceiveScoreFromClient", RpcTarget.MasterClient, Score, PhotonNetwork.LocalPlayer);
     }
 
     public void LoadGameScene(string sceneName)
     {
-        photonView.RPC("LoadScenePerUser", RpcTarget.All, sceneName);
+        photonView.RPC("LoadScenePerUser", RpcTarget.All, sceneName, PhotonNetwork.LocalPlayer);
     }
 
     #endregion
@@ -150,11 +150,11 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     }
 
     [PunRPC]
-    private void ReceivePromptFromClient(string prompt, string client)
+    private void ReceivePromptFromClient(string prompt, Player client)
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        prompts.Add(client, prompt);
+        prompts.Add(client.NickName, prompt);
 
         //TODO: save prompts, generate images, sync everything to all clients
 

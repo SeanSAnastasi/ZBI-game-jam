@@ -61,7 +61,7 @@ public class GameLogic : MonoBehaviour
         else
         {
             string prompt = promptInput.GetComponent<TMP_InputField>().text;
-            networkedGameLogic.SendQuestionPromptsToMaster(prompt);
+            networkedGameLogic.SendPromptsToMaster(prompt);
             
             promptScreen.SetActive(false);
             waitingScreen.SetActive(true);
