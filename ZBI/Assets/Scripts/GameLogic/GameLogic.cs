@@ -26,7 +26,18 @@ public class GameLogic : MonoBehaviour
     public GameObject resultScreen;
     public GameObject messageCanvas;
 
-    
+    [Space(5)]
+    [Header("Players")]
+    public TextMeshProUGUI player1Name;
+    public TextMeshProUGUI player2Name;
+    public TextMeshProUGUI player3Name;
+    public TextMeshProUGUI player4Name;
+
+    public Image player1Sprite;
+    public Image player2Sprite;
+    public Image player3Sprite;
+    public Image player4Sprite;
+
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +87,9 @@ public class GameLogic : MonoBehaviour
     {
         waitingScreen.SetActive(false);
         votingScreen.SetActive(true);
+
+        // 
+
     }
 
     IEnumerator OnMessage(string message)
