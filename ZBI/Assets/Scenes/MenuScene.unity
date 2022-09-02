@@ -2679,7 +2679,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1389650641}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2048871417}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1389650641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3629,6 +3641,8 @@ MonoBehaviour:
   roomInputField: {fileID: 374199465}
   playerPrefab: {fileID: 3334490497224533269, guid: 93bf4fff53844db48815e08a842555e4, type: 3}
   verticalPlayerList: {fileID: 773144842}
+  playerCountText: {fileID: 684170002}
+  startButton: {fileID: 1389650638}
 --- !u!4 &2048871418
 Transform:
   m_ObjectHideFlags: 0

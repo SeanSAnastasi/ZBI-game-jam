@@ -20,6 +20,7 @@ public class MenuController : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject verticalPlayerList;
     public GameObject playerCountText;
+    public GameObject startButton;
 
     private void Awake()
     {
@@ -50,7 +51,6 @@ public class MenuController : MonoBehaviour
         loginScreen.SetActive(false);
         lobbyScreen.SetActive(true);
 
-        GameObject startButton = GameObject.Find("Start Button");
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
         else startButton.SetActive(false);
 
@@ -83,5 +83,15 @@ public class MenuController : MonoBehaviour
         }
 
         playerCountText.GetComponent<TextMeshProUGUI>().text = players.Length.ToString();
+
+        if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
+        else startButton.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+        // Restrict players from joining the current room.
+        networkManager.RestrictPlayersJoiningRoom();
+        networkManager.LoadScenePhoton("GameScene");
     }
 }

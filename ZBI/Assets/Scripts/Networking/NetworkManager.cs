@@ -79,4 +79,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         FindObjectOfType<MenuController>().UpdatePlayerList(PhotonNetwork.PlayerList);
     }
+
+    public void RestrictPlayersJoiningRoom()
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+    }
+
+    public void LoadScenePhoton(string sceneName)
+    {
+        PhotonNetwork.LoadLevel(sceneName);
+    }
 }
