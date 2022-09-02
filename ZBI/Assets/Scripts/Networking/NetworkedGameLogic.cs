@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkedGameLogic : MonoBehaviourPunCallbacks
+public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 {
     [HideInInspector]
     public Player[] activePlayers;
@@ -21,6 +21,8 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     public SortedDictionary<Player, Sprite> GeneratedSprites;
     [HideInInspector]
     public SortedDictionary<Player, int> Scores;
+
+    public static NetworkedGameLogic Instance { get; private set; }
 
     #region Public Methods
     public void StartGame()
@@ -59,6 +61,8 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
         photonView.RPC("ReceiveScoreFromClient", RpcTarget.MasterClient, Score);
     }
 
+
+
     #endregion
 
     #region MonoBehaviourPunCallbacks Callbacks
@@ -78,6 +82,19 @@ public class NetworkedGameLogic : MonoBehaviourPunCallbacks
     #endregion
 
     #region Private Methods
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.Log("Found more than one Network Manager instance in the scene. Destroying the newest one");
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void GenerateSprite(string prompt)
     {
