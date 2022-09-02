@@ -37,6 +37,8 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         prompts = new SortedDictionary<Player, string>();
         Debug.Log("Starting game!");
 
+
+        PhotonNetwork.CurrentRoom.IsOpen = false;
         LoadGameScene("GameScene");
     }
 
