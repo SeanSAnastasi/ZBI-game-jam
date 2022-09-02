@@ -65,9 +65,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         return PhotonNetwork.LeaveRoom();
     }
 
+    public override void OnJoinedRoom()
+    {
+        FindObjectOfType<MenuController>().UpdatePlayerList(PhotonNetwork.PlayerList);
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log(newPlayer.NickName);
         FindObjectOfType<MenuController>().UpdatePlayerList(PhotonNetwork.PlayerList);
     }
 

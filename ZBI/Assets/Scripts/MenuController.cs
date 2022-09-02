@@ -55,11 +55,6 @@ public class MenuController : MonoBehaviour
 
         UpdatePlayerList(networkManager.Players);
         GameObject listedPlayer = Instantiate(playerPrefab);
-
-        listedPlayer.transform.Find("Player Name").GetComponent<TextMeshProUGUI>().text = playerName;
-        listedPlayer.transform.Find("Player Avatar").Find("Avatar Text").GetComponent<TextMeshProUGUI>().text = playerName.Substring(0, 1);
-
-        listedPlayer.transform.SetParent(verticalPlayerList.transform);
     }
 
     public void ExitLobby()
