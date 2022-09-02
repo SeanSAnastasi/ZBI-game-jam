@@ -52,6 +52,14 @@ public class MenuController : MonoBehaviour
         GameObject startButton = GameObject.Find("Start Button");
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
         else startButton.SetActive(false);
+
+        UpdatePlayerList(networkManager.Players);
+        GameObject listedPlayer = Instantiate(playerPrefab);
+
+        listedPlayer.transform.Find("Player Name").GetComponent<TextMeshProUGUI>().text = playerName;
+        listedPlayer.transform.Find("Player Avatar").Find("Avatar Text").GetComponent<TextMeshProUGUI>().text = playerName.Substring(0, 1);
+
+        listedPlayer.transform.SetParent(verticalPlayerList.transform);
     }
 
     public void ExitLobby()
