@@ -7,7 +7,7 @@ using Photon.Realtime;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
+    //public Player player;
     
     void Awake()
     {

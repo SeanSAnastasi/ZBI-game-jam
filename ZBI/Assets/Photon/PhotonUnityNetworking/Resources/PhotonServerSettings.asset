@@ -39,6 +39,14 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - ReceivePromptFromClient
+  - ReceiveQuestionFromClient
+  - SyncPrompts
+  - SyncQuestions
+  - SyncSprites
+  - ReceiveScoreFromClient
+  - SyncScores
+  - LoadScenePerUser
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

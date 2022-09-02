@@ -91,7 +91,8 @@ public class MenuController : MonoBehaviour
     public void StartGame()
     {
         // Restrict players from joining the current room.
-        networkManager.RestrictPlayersJoiningRoom();
-        networkManager.LoadScenePhoton("GameScene");
+        //networkManager.LoadScenePhoton("GameScene");
+
+        FindObjectOfType<NetworkedGameLogic>().StartGame();
     }
 }
