@@ -174,6 +174,23 @@ public class Diffusion : MonoBehaviour
         public string get;
         public string cancel;
     }
+
+
+    public byte[] SpriteTobyte(Sprite sprite)
+    {
+        if (!sprite.texture) return null;
+
+
+        return sprite.texture.GetRawTextureData();
+    }
+
+    public Sprite ByteToSprite(byte[] bytes)
+    {
+        Texture2D tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+        tex.LoadRawTextureData(bytes);
+        return Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height),
+            Vector2.zero, 1f);
+    }
 }
 
 
