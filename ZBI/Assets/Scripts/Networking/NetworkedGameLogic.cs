@@ -114,10 +114,9 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 
     }
 
-    private void Download(string url, Player player, Image image)
+    public void Download(string prompt, Image image)
     {
-
-        StartCoroutine(LoadFromWeb(puppyUrl, player, image));
+        FindObjectOfType<Diffusion>().Download(prompt, image);
     }
 
     IEnumerator LoadFromWeb(string url, Player player, Image image)

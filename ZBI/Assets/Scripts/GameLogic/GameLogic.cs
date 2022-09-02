@@ -88,7 +88,7 @@ public class GameLogic : MonoBehaviour
         waitingScreen.SetActive(false);
         votingScreen.SetActive(true);
 
-        // 
+        networkedGameLogic.Download("nice test text non sexual", player1Sprite);
 
     }
 
