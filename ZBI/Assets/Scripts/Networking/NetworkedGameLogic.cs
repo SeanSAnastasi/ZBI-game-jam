@@ -184,21 +184,13 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         this.questions = questions;
 
         FindObjectOfType<GameLogic>().OnAllQuestionsReady();
-
-        //foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects())
-        //{
-        //    if (item.name == "UI")
-        //    {
-        //        gameLogic = item.GetComponent<GameLogic>();
-        //    }
-        //}
-        //gameLogic.OnAllQuestionsReady();
     }
 
     [PunRPC]
     private void SyncPrompts(Dictionary<string, string> prompts)
     {
         this.prompts = prompts;
+        FindObjectOfType<GameLogic>().OnAllPromptsReady();
     }
 
     [PunRPC]
