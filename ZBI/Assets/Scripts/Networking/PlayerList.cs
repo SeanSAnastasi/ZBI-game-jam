@@ -5,7 +5,10 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 
+<<<<<<< HEAD
 namespace ZBI {
+=======
+>>>>>>> feature/ui
 
     public class PlayerList : MonoBehaviourPunCallbacks
     {
@@ -103,4 +106,7 @@ namespace ZBI {
         #endregion
 
     }
+<<<<<<< HEAD
 }
+=======
+>>>>>>> feature/ui

@@ -16,6 +16,7 @@ namespace ZBI
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
+<<<<<<< HEAD:ZBI/Assets/Scripts/Networking/Launcher.cs
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
         private GameObject controlPanel = null;
@@ -26,6 +27,14 @@ namespace ZBI
         private GameObject PlayerNameInput = null;
         [SerializeField]
         private GameObject RoomNameInput = null;
+=======
+        //[Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        //[SerializeField]
+        //private GameObject controlPanel;
+        //[Tooltip("The UI Label to inform the user that the connection is in progress")]
+        //[SerializeField]
+        //private GameObject progressLabel;
+>>>>>>> feature/ui:ZBI/Assets/Scripts/Launcher.cs
 
         #endregion
 
@@ -66,8 +75,8 @@ namespace ZBI
         /// </summary>
         void Start()
         {
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
+            //progressLabel.SetActive(false);
+            //controlPanel.SetActive(true);
             //Connect();
         }
 
@@ -110,8 +119,8 @@ namespace ZBI
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
+            //progressLabel.SetActive(false);
+            //controlPanel.SetActive(true);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -150,10 +159,15 @@ namespace ZBI
         /// </summary>
         public void Connect()
         {
+<<<<<<< HEAD:ZBI/Assets/Scripts/Networking/Launcher.cs
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
 
             PhotonNetwork.LocalPlayer.NickName = PlayerNameInput.GetComponent<TMP_InputField>().text;
+=======
+            //progressLabel.SetActive(true);
+            //controlPanel.SetActive(false);
+>>>>>>> feature/ui:ZBI/Assets/Scripts/Launcher.cs
             if (PhotonNetwork.IsConnected)
             {
                 isConnecting = true;
@@ -175,10 +189,24 @@ namespace ZBI
             }
         }
 
+<<<<<<< HEAD:ZBI/Assets/Scripts/Networking/Launcher.cs
         public void Connect(string roomName)
         {
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+=======
+        public static bool ConnectToLobby(string playerName, string roomName)
+        {
+            if (!PhotonNetwork.IsConnected) return false;
+
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 4;
+            roomOptions.PublishUserId = true;
+
+            return PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
+        }
+
+>>>>>>> feature/ui:ZBI/Assets/Scripts/Launcher.cs
 
             PhotonNetwork.LocalPlayer.NickName = PlayerNameInput.GetComponent<TMP_InputField>().text;
             if (PhotonNetwork.IsConnected)

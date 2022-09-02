@@ -8,6 +8,7 @@ using Photon.Realtime;
 
 public class MenuController : MonoBehaviour
 {
+    private NetworkManager networkManager;
 
     public GameObject entryScreen;
     public GameObject loginScreen;
@@ -15,7 +16,17 @@ public class MenuController : MonoBehaviour
 
     public TMP_InputField nameInputField;
     public TMP_InputField roomInputField;
-    
+
+    public GameObject playerPrefab;
+    public GameObject verticalPlayerList;
+    public GameObject playerCountText;
+    public GameObject startButton;
+
+    private void Awake()
+    {
+        networkManager = FindObjectOfType<NetworkManager>();
+    }
+
 
     public void NavigateToLogin()
     {
@@ -33,15 +44,54 @@ public class MenuController : MonoBehaviour
         // Display a notification that the player must enter a name and a room name.
         if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(roomName)) return;
 
-        // TODO: connect to or create the lobby.
+        // connect to or create the lobby.
+        if (!networkManager.ConnectToLobby(playerName, roomName)) return;
 
         entryScreen.SetActive(false);
         loginScreen.SetActive(false);
-
         lobbyScreen.SetActive(true);
 
-        GameObject startButton = GameObject.Find("Start Button");
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
         else startButton.SetActive(false);
+
+        UpdatePlayerList(networkManager.Players);
+        GameObject listedPlayer = Instantiate(playerPrefab);
+    }
+
+    public void ExitLobby()
+    {
+        // Disconnect from the lobby.
+        if (!networkManager.LeaveRoom()) return;
+
+        entryScreen.SetActive(false);
+        loginScreen.SetActive(true);
+        lobbyScreen.SetActive(false);
+    }
+
+    public void UpdatePlayerList(Player[] players)
+    {
+        foreach (Transform child in verticalPlayerList.transform) Destroy(child.gameObject);
+
+        foreach(Player player in players)
+        {
+            GameObject listedPlayer = Instantiate(playerPrefab);
+
+            listedPlayer.transform.Find("Player Name").GetComponent<TextMeshProUGUI>().text = player.NickName;
+            listedPlayer.transform.Find("Player Avatar").Find("Avatar Text").GetComponent<TextMeshProUGUI>().text = player.NickName.Substring(0, 1);
+
+            listedPlayer.transform.SetParent(verticalPlayerList.transform);
+        }
+
+        playerCountText.GetComponent<TextMeshProUGUI>().text = players.Length.ToString();
+
+        if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
+        else startButton.SetActive(false);
+    }
+
+    public void StartGame()
+    {
+        // Restrict players from joining the current room.
+        networkManager.RestrictPlayersJoiningRoom();
+        networkManager.LoadScenePhoton("GameScene");
     }
 }
