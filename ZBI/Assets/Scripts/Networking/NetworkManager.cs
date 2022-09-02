@@ -16,6 +16,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         get { return isConnected; }
     }
 
+    public Player[] Players
+    {
+        get { return PhotonNetwork.PlayerList; }
+    }
+
 
     private void Awake()
     {

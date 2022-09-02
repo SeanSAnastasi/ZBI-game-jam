@@ -17,7 +17,6 @@ public class MenuController : MonoBehaviour
     public TMP_InputField nameInputField;
     public TMP_InputField roomInputField;
 
-
     public GameObject playerPrefab;
     public GameObject verticalPlayerList;
 
@@ -54,6 +53,8 @@ public class MenuController : MonoBehaviour
         GameObject startButton = GameObject.Find("Start Button");
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
         else startButton.SetActive(false);
+
+        UpdatePlayerList(networkManager.Players);
     }
 
     public void ExitLobby()
@@ -75,7 +76,7 @@ public class MenuController : MonoBehaviour
             GameObject listedPlayer = Instantiate(playerPrefab);
 
             listedPlayer.transform.Find("Player Name").GetComponent<TextMeshProUGUI>().text = player.NickName;
-            listedPlayer.transform.Find("Avatar Text").GetComponent<TextMeshProUGUI>().text = player.NickName.Substring(0, 1);
+            listedPlayer.transform.Find("Player Avatar").Find("Avatar Text").GetComponent<TextMeshProUGUI>().text = player.NickName.Substring(0, 1);
 
             listedPlayer.transform.SetParent(verticalPlayerList.transform);
         }
