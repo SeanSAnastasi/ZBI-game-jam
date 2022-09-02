@@ -39,7 +39,7 @@ public class Diffusion : MonoBehaviour
         string url = pred_endpoint;
         string json_input = "";
         //JsonUtility.FromJson<jsonInput>(json_input);
-        json_input = "{\"version\": \"a9758cbfbd5f3c2094457d996681af52552901775aa2d6dd0b17fd15df959bef\", \"input\":{\"prompt\": \""+ prompt +"\", \"num_diffusion_steps\": \"1\"}}";
+        json_input = "{\"version\": \"a9758cbfbd5f3c2094457d996681af52552901775aa2d6dd0b17fd15df959bef\", \"input\":{\"prompt\": \""+ prompt +"\", \"num_diffusion_steps\": \"50\"}}";
         //json_input = JsonUtility.ToJson(new jsonInput());
         string headers = "Token " + api_key;
 
