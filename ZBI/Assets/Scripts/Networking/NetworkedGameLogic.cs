@@ -71,7 +71,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 
     public void LoadGameScene(string sceneName)
     {
-        photonView.RPC("LoadScenePerUser", RpcTarget.All, sceneName, PhotonNetwork.LocalPlayer);
+        photonView.RPC("LoadScenePerUser", RpcTarget.All, sceneName);
     }
 
     #endregion
