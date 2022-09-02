@@ -97,6 +97,7 @@ public class GameLogic : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
+            Debug.Log(networkedGameLogic.prompts[PhotonNetwork.PlayerList[i].NickName]);
             networkedGameLogic.Download(networkedGameLogic.prompts[PhotonNetwork.PlayerList[i].NickName], sprites[i]);
         }
 

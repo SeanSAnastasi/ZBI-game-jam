@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 27857839}
   - component: {fileID: 27857841}
   - component: {fileID: 27857840}
-  - component: {fileID: 27857842}
   m_Layer: 5
   m_Name: Imagep3
   m_TagString: Untagged
@@ -200,28 +199,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27857838}
   m_CullTransparentMesh: 1
---- !u!114 &27857842
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27857838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 2
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &109944376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,7 +2090,6 @@ GameObject:
   - component: {fileID: 848723975}
   - component: {fileID: 848723977}
   - component: {fileID: 848723976}
-  - component: {fileID: 848723978}
   m_Layer: 5
   m_Name: Imagep2
   m_TagString: Untagged
@@ -2179,28 +2155,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 848723974}
   m_CullTransparentMesh: 1
---- !u!114 &848723978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848723974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 4
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &870418395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2727,6 @@ GameObject:
   - component: {fileID: 997797378}
   - component: {fileID: 997797380}
   - component: {fileID: 997797379}
-  - component: {fileID: 997797381}
   m_Layer: 5
   m_Name: Imagep1
   m_TagString: Untagged
@@ -2839,28 +2792,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997797377}
   m_CullTransparentMesh: 1
---- !u!114 &997797381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997797377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1053726459
 GameObject:
   m_ObjectHideFlags: 0
@@ -4896,7 +4827,6 @@ GameObject:
   - component: {fileID: 1781753806}
   - component: {fileID: 1781753808}
   - component: {fileID: 1781753807}
-  - component: {fileID: 1781753809}
   m_Layer: 5
   m_Name: Imagep4
   m_TagString: Untagged
@@ -4962,28 +4892,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781753805}
   m_CullTransparentMesh: 1
---- !u!114 &1781753809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1781753805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 3
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1 &1797132173
 GameObject:
   m_ObjectHideFlags: 0
