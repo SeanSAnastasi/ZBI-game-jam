@@ -15,12 +15,12 @@ namespace GarticAI
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
         private byte maxPlayersPerRoom = 4;
-        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
-        [SerializeField]
-        private GameObject controlPanel;
-        [Tooltip("The UI Label to inform the user that the connection is in progress")]
-        [SerializeField]
-        private GameObject progressLabel;
+        //[Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        //[SerializeField]
+        //private GameObject controlPanel;
+        //[Tooltip("The UI Label to inform the user that the connection is in progress")]
+        //[SerializeField]
+        //private GameObject progressLabel;
 
         #endregion
 
@@ -61,8 +61,8 @@ namespace GarticAI
         /// </summary>
         void Start()
         {
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
+            //progressLabel.SetActive(false);
+            //controlPanel.SetActive(true);
             //Connect();
         }
 
@@ -90,8 +90,8 @@ namespace GarticAI
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnDisconnected() was called by PUN with reason {0}", cause);
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
+            //progressLabel.SetActive(false);
+            //controlPanel.SetActive(true);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
@@ -127,8 +127,8 @@ namespace GarticAI
         /// </summary>
         public void Connect()
         {
-            progressLabel.SetActive(true);
-            controlPanel.SetActive(false);
+            //progressLabel.SetActive(true);
+            //controlPanel.SetActive(false);
             if (PhotonNetwork.IsConnected)
             {
                 PhotonNetwork.JoinRandomRoom();
@@ -138,6 +138,17 @@ namespace GarticAI
                 isConnecting = PhotonNetwork.ConnectUsingSettings();
                 PhotonNetwork.GameVersion = gameVersion;
             }
+        }
+
+        public static bool ConnectToLobby(string playerName, string roomName)
+        {
+            if (!PhotonNetwork.IsConnected) return false;
+
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 4;
+            roomOptions.PublishUserId = true;
+
+            return PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
         }
 
 
