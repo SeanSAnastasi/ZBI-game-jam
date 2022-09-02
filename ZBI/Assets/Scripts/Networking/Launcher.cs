@@ -1,9 +1,10 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 
-namespace GarticAI
+namespace ZBI
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
@@ -17,10 +18,14 @@ namespace GarticAI
         private byte maxPlayersPerRoom = 4;
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
-        private GameObject controlPanel;
+        private GameObject controlPanel = null;
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         [SerializeField]
-        private GameObject progressLabel;
+        private GameObject progressLabel = null;
+        [SerializeField]
+        private GameObject PlayerNameInput = null;
+        [SerializeField]
+        private GameObject RoomNameInput = null;
 
         #endregion
 
@@ -81,10 +86,25 @@ namespace GarticAI
             // we don't want to do anything.
             if (isConnecting)
             {
-                // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRandomRoom();
+                string roomName = RoomNameInput.GetComponent<TMP_InputField>().text;
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    PhotonNetwork.JoinRoom(roomName);
+                }
+                else
+                {
+                    PhotonNetwork.JoinRoom(PlayerNameInput.GetComponent<TMP_InputField>().text);
+                }
                 isConnecting = false;
             }
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.LogWarningFormat("PUN Basics Tutorial/Launcher: OnJoinRoomFailed() was called by PUN with message {0}", message);
+            string roomName = RoomNameInput.GetComponent<TMP_InputField>().text;
+            PhotonNetwork.CreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -108,12 +128,12 @@ namespace GarticAI
             // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                Debug.Log("We load the 'Room' ");
+                Debug.Log("We load the 'Lobby' ");
 
 
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("Room");
+                PhotonNetwork.LoadLevel("Lobby");
             }
         }
 
@@ -132,9 +152,21 @@ namespace GarticAI
         {
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+
+            PhotonNetwork.LocalPlayer.NickName = PlayerNameInput.GetComponent<TMP_InputField>().text;
             if (PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.JoinRandomRoom();
+                isConnecting = true;
+                string roomName = RoomNameInput.GetComponent<TMP_InputField>().text;
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    PhotonNetwork.JoinRoom(roomName);
+                }
+                else
+                {
+                    PhotonNetwork.JoinRoom(PlayerNameInput.GetComponent<TMP_InputField>().text);
+                }
             }
             else
             {
@@ -143,7 +175,31 @@ namespace GarticAI
             }
         }
 
+        public void Connect(string roomName)
+        {
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
 
+            PhotonNetwork.LocalPlayer.NickName = PlayerNameInput.GetComponent<TMP_InputField>().text;
+            if (PhotonNetwork.IsConnected)
+            {
+                isConnecting = true;
+
+                if (!string.IsNullOrEmpty(roomName))
+                {
+                    PhotonNetwork.JoinRoom(roomName);
+                }
+                else
+                {
+                    PhotonNetwork.JoinRoom(PlayerNameInput.GetComponent<TMP_InputField>().text);
+                }
+            }
+            else
+            {
+                isConnecting = PhotonNetwork.ConnectUsingSettings();
+                PhotonNetwork.GameVersion = gameVersion;
+            }
+        }
         #endregion
 
 
