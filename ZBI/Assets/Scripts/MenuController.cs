@@ -16,7 +16,16 @@ public class MenuController : MonoBehaviour
     public TMP_InputField nameInputField;
     public TMP_InputField roomInputField;
 
+
     public GameObject playerPrefab;
+
+    public NetworkManager networkManager;
+
+    private void Awake()
+    {
+        networkManager = FindObjectOfType<NetworkManager>();
+    }
+
 
     public void NavigateToLogin()
     {
@@ -34,7 +43,8 @@ public class MenuController : MonoBehaviour
         // Display a notification that the player must enter a name and a room name.
         if (string.IsNullOrEmpty(playerName) || string.IsNullOrEmpty(roomName)) return;
 
-        // TODO: connect to or create the lobby.
+        // connect to or create the lobby.
+        if (!networkManager.ConnectToLobby(playerName, roomName)) return;
 
         entryScreen.SetActive(false);
         loginScreen.SetActive(false);
@@ -49,6 +59,7 @@ public class MenuController : MonoBehaviour
     public void ExitLobby()
     {
         // TODO: disconnect from the lobby.
+        if (!networkManager.LeaveRoom()) return;
         entryScreen.SetActive(false);
         loginScreen.SetActive(true);
         lobbyScreen.SetActive(false);
