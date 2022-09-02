@@ -44,4 +44,12 @@ public class MenuController : MonoBehaviour
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
         else startButton.SetActive(false);
     }
+
+    public void ExitLobby()
+    {
+        // TODO: disconnect from the lobby.
+        entryScreen.SetActive(false);
+        loginScreen.SetActive(true);
+        lobbyScreen.SetActive(false);
+    }
 }
