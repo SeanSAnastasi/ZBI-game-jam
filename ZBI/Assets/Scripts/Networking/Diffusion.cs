@@ -107,7 +107,7 @@ public class Diffusion : MonoBehaviour
         string imageurl = maybeurl.Substring(1, maybeurl.Length-2);
         Debug.Log(imageurl);
 
-        LoadFromWeb(imageurl, image);
+        StartCoroutine(LoadFromWeb(imageurl, image));
         //yield return imageurl;
     }
 
