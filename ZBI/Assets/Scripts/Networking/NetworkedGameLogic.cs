@@ -13,15 +13,15 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     [HideInInspector]
     public Player[] activePlayers;
     [HideInInspector]
-    public SortedDictionary<Player, string> questions;
+    public Dictionary<string, string> questions;
     [HideInInspector]
     public int currentQuestionIndex;
     [HideInInspector]
-    public SortedDictionary<Player, string> prompts;
+    public Dictionary<string, string> prompts;
     [HideInInspector]
-    public SortedDictionary<Player, Sprite> GeneratedSprites;
+    public Dictionary<string, Sprite> GeneratedSprites;
     [HideInInspector]
-    public SortedDictionary<Player, int> Scores;
+    public Dictionary<string, int> Scores;
 
     public static NetworkedGameLogic Instance { get; private set; }
 
@@ -32,9 +32,9 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     {
         PhotonNetwork.AutomaticallySyncScene = true;
         activePlayers = PhotonNetwork.PlayerList;
-        questions = new SortedDictionary<Player, string>();
+        questions = new Dictionary<string, string>();
         currentQuestionIndex = 0;
-        prompts = new SortedDictionary<Player, string>();
+        prompts = new Dictionary<string, string>();
         Debug.Log("Starting game!");
 
 
@@ -42,9 +42,9 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         LoadGameScene("GameScene");
     }
 
-    public KeyValuePair<Player, string> GetCurrentQuestion()
+    public KeyValuePair<string, string> GetCurrentQuestion()
     {
-        KeyValuePair<Player, string> currentQuestion = questions.ToArray()[currentQuestionIndex];
+        KeyValuePair<string, string> currentQuestion = questions.ToArray()[currentQuestionIndex];
         return currentQuestion;
     }
     public bool IsGenerationDone()
@@ -129,7 +129,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
             Sprite sprite = Sprite.Create(t, new Rect(0, 0, t.width, t.height),
                 Vector2.zero, 1f);
 
-            GeneratedSprites.Add(player, sprite);
+            GeneratedSprites.Add(player.NickName, sprite);
         }
     }
 
@@ -138,12 +138,14 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        questions.Add(client, question);
+        questions.Add(client.NickName, question);
 
         if (activePlayers.Length <= questions.Count)
         {
             PhotonView photonView = PhotonView.Get(this);
             photonView.RPC("SyncQuestions", RpcTarget.All, questions);
+
+            //FindObjectOfType<GameLogic>().OnAllQuestionsReady();
         }
     }
 
@@ -152,7 +154,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        prompts.Add(client, prompt);
+        prompts.Add(client.NickName, prompt);
 
         //TODO: save prompts, generate images, sync everything to all clients
 
@@ -168,7 +170,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        Scores.Add(client, score);
+        Scores.Add(client.NickName, score);
 
         //TODO: Sync score with all clients
 
@@ -177,35 +179,36 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     }
 
     [PunRPC]
-    private void SyncQuestions(SortedDictionary<Player, string> questions)
+    private void SyncQuestions(Dictionary<string, string> questions)
     {
         this.questions = questions;
 
+        FindObjectOfType<GameLogic>().OnAllQuestionsReady();
 
-        foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (item.name == "UI")
-            {
-                gameLogic = item.GetComponent<GameLogic>();
-            }
-        }
-        gameLogic.OnAllQuestionsReady();
+        //foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects())
+        //{
+        //    if (item.name == "UI")
+        //    {
+        //        gameLogic = item.GetComponent<GameLogic>();
+        //    }
+        //}
+        //gameLogic.OnAllQuestionsReady();
     }
 
     [PunRPC]
-    private void SyncPrompts(SortedDictionary<Player, string> prompts)
+    private void SyncPrompts(Dictionary<string, string> prompts)
     {
         this.prompts = prompts;
     }
 
     [PunRPC]
-    private void SyncSprites(SortedDictionary<Player, Sprite> GeneratedImages)
+    private void SyncSprites(Dictionary<string, Sprite> GeneratedImages)
     {
         this.GeneratedSprites = GeneratedImages;
     }
 
     [PunRPC]
-    private void SyncScores(SortedDictionary<Player, int> Scores)
+    private void SyncScores(Dictionary<string, int> Scores)
     {
         this.Scores = Scores;
     }
