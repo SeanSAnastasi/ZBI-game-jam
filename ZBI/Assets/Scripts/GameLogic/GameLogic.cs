@@ -26,12 +26,14 @@ public class GameLogic : MonoBehaviour
     public GameObject resultScreen;
     public GameObject messageCanvas;
 
+    
 
     // Start is called before the first frame update
     void Start()
     {
         networkedGameLogic = NetworkedGameLogic.Instance;
     }
+
     public void OnQuestionButtonPressed()
     {
         if(string.IsNullOrEmpty(questionInput.text))
@@ -42,6 +44,8 @@ public class GameLogic : MonoBehaviour
         {
             string question = questionInput.GetComponent<TMP_InputField>().text;
             networkedGameLogic.SendQuestionToMaster(question);
+
+            Debug.Log("test");
             
             questionScreen.SetActive(false);
             waitingScreen.SetActive(true);

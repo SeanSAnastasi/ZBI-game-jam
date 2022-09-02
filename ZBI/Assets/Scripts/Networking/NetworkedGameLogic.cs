@@ -30,6 +30,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     #region Public Methods
     public void StartGame()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         activePlayers = PhotonNetwork.PlayerList;
         questions = new SortedDictionary<Player, string>();
         currentQuestionIndex = 0;
@@ -37,8 +38,6 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         Debug.Log("Starting game!");
 
         PhotonNetwork.LoadLevel("GameScene");
-
-        
     }
 
     public KeyValuePair<Player, string> GetCurrentQuestion()
@@ -53,8 +52,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 
     public void SendQuestionToMaster(string question)
     {
-        PhotonView photonView = PhotonView.Get(this);
-        photonView.RPC("ReceiveQuestionFromClient", RpcTarget.MasterClient, question);
+        photonView.RPC("ReceiveQuestionFromClient", RpcTarget.MasterClient, question, PhotonNetwork.LocalPlayer);
     }
 
     public void SendQuestionPromptsToMaster(string prompt)

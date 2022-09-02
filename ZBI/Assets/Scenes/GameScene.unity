@@ -258,6 +258,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109944376}
   m_CullTransparentMesh: 1
+--- !u!1 &178228167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 178228169}
+  - component: {fileID: 178228168}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &178228168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178228167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5342658056e2228458e9a915f86d0784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionInput: {fileID: 1224520847}
+  promptInput: {fileID: 401052416}
+  questionScreen: {fileID: 1797132173}
+  promptScreen: {fileID: 268050801}
+  waitingScreen: {fileID: 1160042952}
+  votingScreen: {fileID: 1161407443}
+  scoreScreen: {fileID: 779702060}
+  resultScreen: {fileID: 1475591401}
+  messageCanvas: {fileID: 469040308}
+--- !u!4 &178228169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178228167}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 511.94226, y: 260.6198, z: -0.11532384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &197242870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,9 +1639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963067740}
-  - component: {fileID: 963067741}
   - component: {fileID: 963067743}
-  - component: {fileID: 963067742}
   - component: {fileID: 963067746}
   - component: {fileID: 963067745}
   - component: {fileID: 963067744}
@@ -1621,35 +1672,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963067741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963067739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5342658056e2228458e9a915f86d0784, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionInput: {fileID: 1224520847}
-  promptInput: {fileID: 401052416}
-  questionScreen: {fileID: 1797132173}
-  promptScreen: {fileID: 268050801}
-  waitingScreen: {fileID: 1160042952}
-  votingScreen: {fileID: 1161407443}
-  scoreScreen: {fileID: 779702060}
-  resultScreen: {fileID: 1475591401}
-  messageCanvas: {fileID: 469040308}
---- !u!81 &963067742
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963067739}
-  m_Enabled: 1
 --- !u!114 &963067743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2289,6 +2311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1156089321}
   - component: {fileID: 1156089320}
+  - component: {fileID: 1156089322}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2354,6 +2377,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &1156089322
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156089318}
+  m_Enabled: 1
 --- !u!1 &1160042952
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,7 +2670,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 963067741}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameLogic, Assembly-CSharp
         m_MethodName: OnPromptButtonPressed
         m_Mode: 1
@@ -3199,7 +3230,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 963067741}
+      - m_Target: {fileID: 178228168}
         m_TargetAssemblyTypeName: GameLogic, Assembly-CSharp
         m_MethodName: OnQuestionButtonPressed
         m_Mode: 1
