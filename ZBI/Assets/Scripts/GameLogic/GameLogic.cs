@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class GameLogic : MonoBehaviour
 {
@@ -32,11 +34,11 @@ public class GameLogic : MonoBehaviour
     public TextMeshProUGUI player2Name;
     public TextMeshProUGUI player3Name;
     public TextMeshProUGUI player4Name;
+    public List<Image> sprites;
 
-    public Image player1Sprite;
-    public Image player2Sprite;
-    public Image player3Sprite;
-    public Image player4Sprite;
+    [Space(5)]
+    [Header("UI")]
+    public TextMeshProUGUI promptText;
 
 
     // Start is called before the first frame update
@@ -47,7 +49,7 @@ public class GameLogic : MonoBehaviour
 
     public void OnQuestionButtonPressed()
     {
-        if(string.IsNullOrEmpty(questionInput.text))
+        if (string.IsNullOrEmpty(questionInput.text))
         {
             StartCoroutine(OnMessage("Your question is not valid."));
         }
@@ -63,7 +65,7 @@ public class GameLogic : MonoBehaviour
 
     public void OnPromptButtonPressed()
     {
-        if(string.IsNullOrEmpty(promptInput.text))
+        if (string.IsNullOrEmpty(promptInput.text))
         {
             StartCoroutine(OnMessage("Your prompt is not valid."));
         }
@@ -81,6 +83,9 @@ public class GameLogic : MonoBehaviour
     {
         waitingScreen.SetActive(false);
         promptScreen.SetActive(true);
+
+        KeyValuePair<string, string> question = networkedGameLogic.GetCurrentQuestion();
+        promptText.text = question.Value;
     }
 
     public void OnAllPromptsReady()
@@ -88,7 +93,10 @@ public class GameLogic : MonoBehaviour
         waitingScreen.SetActive(false);
         votingScreen.SetActive(true);
 
-        networkedGameLogic.Download("nice test text non sexual", player1Sprite);
+        if (!PhotonNetwork.IsMasterClient) return;
+
+        for (int i = 0; i < 4; i++)
+            networkedGameLogic.Download(networkedGameLogic.prompts[PhotonNetwork.PlayerList[i].NickName], sprites[i]);
 
     }
 
