@@ -352,7 +352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &140592311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -491,10 +491,12 @@ MonoBehaviour:
   player2Name: {fileID: 1572020982}
   player3Name: {fileID: 1709441145}
   player4Name: {fileID: 585313205}
-  player1Sprite: {fileID: 997797379}
-  player2Sprite: {fileID: 848723976}
-  player3Sprite: {fileID: 27857840}
-  player4Sprite: {fileID: 1781753807}
+  sprites:
+  - {fileID: 997797379}
+  - {fileID: 848723976}
+  - {fileID: 27857840}
+  - {fileID: 1781753807}
+  promptText: {fileID: 2091426817}
 --- !u!4 &178228169
 Transform:
   m_ObjectHideFlags: 0
@@ -4908,7 +4910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1797132174
 RectTransform:
   m_ObjectHideFlags: 0

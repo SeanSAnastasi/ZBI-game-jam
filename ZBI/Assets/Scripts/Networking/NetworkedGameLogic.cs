@@ -158,7 +158,6 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 
         prompts.Add(client.NickName, prompt);
 
-        //TODO: save prompts, generate images, sync everything to all clients
 
         if (activePlayers.Length <= prompts.Count)
         {
