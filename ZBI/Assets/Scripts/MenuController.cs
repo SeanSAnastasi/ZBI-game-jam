@@ -19,6 +19,7 @@ public class MenuController : MonoBehaviour
 
     public GameObject playerPrefab;
     public GameObject verticalPlayerList;
+    public GameObject playerCountText;
 
     private void Awake()
     {
@@ -80,5 +81,7 @@ public class MenuController : MonoBehaviour
 
             listedPlayer.transform.SetParent(verticalPlayerList.transform);
         }
+
+        playerCountText.GetComponent<TextMeshProUGUI>().text = players.Length.ToString();
     }
 }
