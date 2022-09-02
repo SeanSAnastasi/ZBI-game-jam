@@ -6,11 +6,11 @@ using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
-    public Player player;
+    //public Player player;
     
     void Awake()
     {
-        player = new Player();
+        //player = new Player();
         LoadScene("MenuScene");
     }
 

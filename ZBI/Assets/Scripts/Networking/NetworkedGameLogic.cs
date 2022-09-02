@@ -31,6 +31,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         questions = new SortedDictionary<Player, string>();
         currentQuestionIndex = 0;
         prompts = new SortedDictionary<Player, string>();
+        Debug.Log("Starting game!");
     }
 
     public KeyValuePair<Player, string> GetCurrentQuestion()
