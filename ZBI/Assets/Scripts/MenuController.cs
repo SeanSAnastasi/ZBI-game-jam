@@ -15,7 +15,8 @@ public class MenuController : MonoBehaviour
 
     public TMP_InputField nameInputField;
     public TMP_InputField roomInputField;
-    
+
+    public GameObject playerPrefab;
 
     public void NavigateToLogin()
     {
