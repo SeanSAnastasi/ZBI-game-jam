@@ -7,9 +7,14 @@ using Photon.Realtime;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
 
-    public bool isConnected = false;
-
+    private bool isConnected = false;
     private static bool instanceExists = false;
+
+
+    public bool IsConnected
+    {
+        get { return isConnected; }
+    }
 
 
     private void Awake()
@@ -45,6 +50,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
         roomOptions.PublishUserId = true;
+        PhotonNetwork.LocalPlayer.NickName = playerName;
 
         return PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
     }
@@ -52,5 +58,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public bool LeaveRoom()
     {
         return PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        Debug.Log("Entered room");
+        GetComponent<MenuController>().UpdatePlayerList(PhotonNetwork.PlayerList);
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        GetComponent<MenuController>().UpdatePlayerList(PhotonNetwork.PlayerList);
     }
 }

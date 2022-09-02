@@ -8,6 +8,7 @@ using Photon.Realtime;
 
 public class MenuController : MonoBehaviour
 {
+    private NetworkManager networkManager;
 
     public GameObject entryScreen;
     public GameObject loginScreen;
@@ -18,8 +19,7 @@ public class MenuController : MonoBehaviour
 
 
     public GameObject playerPrefab;
-
-    public NetworkManager networkManager;
+    public GameObject verticalPlayerList;
 
     private void Awake()
     {
@@ -58,10 +58,26 @@ public class MenuController : MonoBehaviour
 
     public void ExitLobby()
     {
-        // TODO: disconnect from the lobby.
+        // Disconnect from the lobby.
         if (!networkManager.LeaveRoom()) return;
+
         entryScreen.SetActive(false);
         loginScreen.SetActive(true);
         lobbyScreen.SetActive(false);
+    }
+
+    public void UpdatePlayerList(Player[] players)
+    {
+        foreach (Transform child in verticalPlayerList.transform) Destroy(child.gameObject);
+
+        foreach(Player player in players)
+        {
+            GameObject listedPlayer = Instantiate(playerPrefab);
+
+            listedPlayer.transform.Find("Player Name").GetComponent<TextMeshProUGUI>().text = player.NickName;
+            listedPlayer.transform.Find("Avatar Text").GetComponent<TextMeshProUGUI>().text = player.NickName.Substring(0, 1);
+
+            listedPlayer.transform.SetParent(verticalPlayerList.transform);
+        }
     }
 }
