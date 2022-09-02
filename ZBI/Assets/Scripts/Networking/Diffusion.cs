@@ -35,6 +35,7 @@ public class Diffusion : MonoBehaviour
 
     public void DoDaGenerate(string prompt, Image image)
     {
+        prompt = "an oil painting of a " + prompt;
         string url = pred_endpoint;
         string json_input = "";
         //JsonUtility.FromJson<jsonInput>(json_input);
