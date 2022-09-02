@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 {
@@ -24,6 +25,8 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 
     public static NetworkedGameLogic Instance { get; private set; }
 
+    private GameLogic gameLogic;
+
     #region Public Methods
     public void StartGame()
     {
@@ -34,6 +37,8 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         Debug.Log("Starting game!");
 
         PhotonNetwork.LoadLevel("GameScene");
+
+        
     }
 
     public KeyValuePair<Player, string> GetCurrentQuestion()
@@ -172,6 +177,16 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     private void SyncQuestions(SortedDictionary<Player, string> questions)
     {
         this.questions = questions;
+
+
+        foreach (var item in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (item.name == "UI")
+            {
+                gameLogic = item.GetComponent<GameLogic>();
+            }
+        }
+        gameLogic.OnAllQuestionsReady();
     }
 
     [PunRPC]
