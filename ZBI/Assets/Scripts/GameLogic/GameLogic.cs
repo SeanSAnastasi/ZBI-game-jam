@@ -10,30 +10,65 @@ public class GameLogic : MonoBehaviour
     //cashed
     NetworkedGameLogic networkedGameLogic;
 
-    GameObject QuestionScreen;
-    GameObject QuestionInput;
-    GameObject QuestionButton;
+    [Space(5)]
+    [Header("Input fields")]
+    public TMP_InputField questionInput;
+    public TMP_InputField promptInput;
 
-    GameObject WaitingScreen;
+
+    [Space(5)]
+    [Header("Screens")]
+    public GameObject questionScreen;
+    public GameObject promptScreen;
+    public GameObject waitingScreen;
+    public GameObject votingScreen;
+    public GameObject scoreScreen;
+    public GameObject resultScreen;
+    public GameObject messageCanvas;
+
 
     // Start is called before the first frame update
     void Start()
     {
         networkedGameLogic = NetworkedGameLogic.Instance;
-
-        Transform QuestionScreenTransform = transform.Find("QuestionScreen");
-        QuestionScreen = QuestionScreenTransform.gameObject;
-        QuestionInput = QuestionScreenTransform.Find("QuestionInput").gameObject;
-        QuestionButton = QuestionScreenTransform.Find("QuestionButton").gameObject;
-
-        QuestionButton.GetComponent<Button>().onClick.AddListener(OnQuestionButtonPressed);
+    }
+    public void OnQuestionButtonPressed()
+    {
+        if(string.IsNullOrEmpty(questionInput.text))
+        {
+            StartCoroutine(OnMessage("Your question is not valid."));
+        }
+        else
+        {
+            string question = questionInput.GetComponent<TMP_InputField>().text;
+            networkedGameLogic.SendQuestionToMaster(question);
+            
+            questionScreen.SetActive(false);
+            waitingScreen.SetActive(true);
+        }
     }
 
-    void OnQuestionButtonPressed()
+    public void OnPromptButtonPressed()
     {
-        QuestionScreen.SetActive(false);
+        if(string.IsNullOrEmpty(promptInput.text))
+        {
+            StartCoroutine(OnMessage("Your prompt is not valid."));
+        }
+        else
+        {
+            string prompt = promptInput.GetComponent<TMP_InputField>().text;
+            networkedGameLogic.SendQuestionPromptsToMaster(prompt);
+            
+            promptScreen.SetActive(false);
+            waitingScreen.SetActive(true);
+        }
+    }
 
-        string question = QuestionInput.GetComponent<TextMeshProUGUI>().text;
-        networkedGameLogic.SendQuestionToMaster(question);
+    IEnumerator OnMessage(string message)
+    {
+        messageCanvas.SetActive(true);
+        messageCanvas.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = message;
+        yield return new WaitForSeconds(1.5f);
+        messageCanvas.SetActive(false);
     }
 }
