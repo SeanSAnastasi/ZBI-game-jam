@@ -150,11 +150,11 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     }
 
     [PunRPC]
-    private void ReceivePromptFromClient(string prompt, Player client)
+    private void ReceivePromptFromClient(string prompt, string client)
     {
         if (!PhotonNetwork.IsMasterClient) return;
 
-        prompts.Add(client.NickName, prompt);
+        prompts.Add(client, prompt);
 
         //TODO: save prompts, generate images, sync everything to all clients
 
