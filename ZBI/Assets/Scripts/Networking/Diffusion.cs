@@ -24,9 +24,9 @@ public class Diffusion : MonoBehaviour
 
     Sprite _latestSprite;
 
-    public void Download(string url, Image image)
+    public void Download(string prompt, Image image)
     {
-        DoDaGenerate("puppy", image);
+        DoDaGenerate(prompt, image);
         //StartCoroutine(LoadFromWeb(url));
     }
 
