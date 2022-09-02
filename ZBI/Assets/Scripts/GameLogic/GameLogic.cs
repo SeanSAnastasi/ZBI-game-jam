@@ -64,6 +64,18 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    public void OnAllQuestionsReady()
+    {
+        waitingScreen.SetActive(false);
+        promptScreen.SetActive(true);
+    }
+
+    public void OnAllPromptsReady()
+    {
+        waitingScreen.SetActive(false);
+        votingScreen.SetActive(true);
+    }
+
     IEnumerator OnMessage(string message)
     {
         messageCanvas.SetActive(true);

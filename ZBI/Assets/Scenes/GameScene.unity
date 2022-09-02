@@ -1587,6 +1587,8 @@ GameObject:
   m_Component:
   - component: {fileID: 963067740}
   - component: {fileID: 963067741}
+  - component: {fileID: 963067743}
+  - component: {fileID: 963067742}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1637,6 +1639,30 @@ MonoBehaviour:
   scoreScreen: {fileID: 779702060}
   resultScreen: {fileID: 1475591401}
   messageCanvas: {fileID: 469040308}
+--- !u!81 &963067742
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963067739}
+  m_Enabled: 1
+--- !u!114 &963067743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963067739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41d53d228c5d844e9f97fbf4dbaffcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - {fileID: 8300000, guid: 0d89e2440cd6afa489a3f3521918efe0, type: 3}
+  - {fileID: 8300000, guid: bcfb85fcb24eb09428f9391303c805cb, type: 3}
+  - {fileID: 8300000, guid: 88ad2232364bb3e438dbc3cac6f738cd, type: 3}
 --- !u!1 &1019985302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +1994,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1156089321}
   - component: {fileID: 1156089320}
-  - component: {fileID: 1156089319}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1976,14 +2001,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1156089319
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156089318}
-  m_Enabled: 1
 --- !u!20 &1156089320
 Camera:
   m_ObjectHideFlags: 0
@@ -2882,6 +2899,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: GameLogic, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
