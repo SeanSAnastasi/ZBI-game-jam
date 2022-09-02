@@ -60,11 +60,11 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-            string prompt = promptInput.GetComponent<TMP_InputField>().text;
-            networkedGameLogic.SendPromptsToMaster(prompt);
-            
             promptScreen.SetActive(false);
             waitingScreen.SetActive(true);
+
+            string prompt = promptInput.GetComponent<TMP_InputField>().text;
+            networkedGameLogic.SendPromptsToMaster(prompt);
         }
     }
 
