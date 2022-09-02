@@ -37,7 +37,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         prompts = new SortedDictionary<Player, string>();
         Debug.Log("Starting game!");
 
-        PhotonNetwork.LoadLevel("GameScene");
+        LoadGameScene("GameScene");
     }
 
     public KeyValuePair<Player, string> GetCurrentQuestion()
@@ -67,7 +67,10 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         photonView.RPC("ReceiveScoreFromClient", RpcTarget.MasterClient, Score);
     }
 
-
+    public void LoadGameScene(string sceneName)
+    {
+        photonView.RPC("LoadScenePerUser", RpcTarget.All, sceneName);
+    }
 
     #endregion
 
@@ -203,6 +206,12 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     private void SyncScores(SortedDictionary<Player, int> Scores)
     {
         this.Scores = Scores;
+    }
+
+    [PunRPC]
+    private void LoadScenePerUser(string sceneName)
+    {
+        PhotonNetwork.LoadLevel(sceneName);
     }
 
     #endregion
