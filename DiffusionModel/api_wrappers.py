@@ -23,7 +23,7 @@ def generate_image(
     api_key,
     model_version,
     pred_endpoint="https://api.replicate.com/v1/predictions",
-    num_diffusion_steps=50,
+    **kwargs,
 ):
     """Generate image using stable diffusion model.
 
@@ -41,7 +41,7 @@ def generate_image(
     start = time.time()
     json_input = {
         "version": model_version,
-        "input": {"prompt": prompt, "num_inference_steps": num_diffusion_steps},
+        "input": {"prompt": prompt, **kwargs},
     }
     response = requests.post(
         pred_endpoint, json=json_input, headers={"Authorization": f"Token {api_key}"}
@@ -60,6 +60,8 @@ def generate_image(
         time.sleep(1)
 
     output_image_url = content["output"][0]
+    if type(output_image_url) == dict:
+        output_image_url = output_image_url["file"]
     end = time.time()
     generation_time = end - start
     logging.debug(f"Time to generate image: {generation_time}")
@@ -74,4 +76,5 @@ def display_image_from_url(output_image_url):
         output_image_url (str): URL of image to display.
     """
     im = Image.open(requests.get(output_image_url, stream=True).raw)
+    im.resize((512, 512))
     im.show()
