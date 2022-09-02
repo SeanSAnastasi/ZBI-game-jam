@@ -19,7 +19,8 @@ public class Diffusion : MonoBehaviour
     public string puppyUrl = "https://i.pinimg.com/originals/c1/81/dc/c181dc51de2b255351e639bff4c3ebec.jpg";
 
     string pred_endpoint = "https://api.replicate.com/v1/predictions";
-    string api_key = "411758a7bd9e0c142c9c56a4a2fea3d7833c0195";
+    //string api_key = "411758a7bd9e0c142c9c56a4a2fea3d7833c0195";
+    string api_key = "c8f9795f6fa92fdffabf455582f38a9a3cf62945";
     string model_version = "a9758cbfbd5f3c2094457d996681af52552901775aa2d6dd0b17fd15df959bef";
 
     Sprite _latestSprite;
