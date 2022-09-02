@@ -6,12 +6,12 @@ from api_wrappers import (
 
 pred_endpoint = "https://api.replicate.com/v1/predictions"
 api_key = "411758a7bd9e0c142c9c56a4a2fea3d7833c0195"
-model_version = "a9758cbfbd5f3c2094457d996681af52552901775aa2d6dd0b17fd15df959bef"
+model_version = "a9758cbfbd5f3c2094457d996681af52552901775aa2d6dd0b17fd15df959bef"  # Stable diffusion
 backup_model_version = (
-    "9218d6e9a0f5f147f53f31ab6a2d562e5e88a3dab5c2f74fce9e067b868b9ca4"
+    "9218d6e9a0f5f147f53f31ab6a2d562e5e88a3dab5c2f74fce9e067b868b9ca4"  # Glide
 )
 
-style = "a photograph of"
+style = "an oil painting"
 description = "a small cottage with a thatched roof and wooden exterior next to a lake with mountains in the background"
 num_diffusion_steps = 50
 respace = 250
