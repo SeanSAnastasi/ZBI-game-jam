@@ -42,13 +42,11 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-            string question = questionInput.GetComponent<TMP_InputField>().text;
-            networkedGameLogic.SendQuestionToMaster(question);
-
-            Debug.Log("test");
-            
             questionScreen.SetActive(false);
             waitingScreen.SetActive(true);
+
+            string question = questionInput.GetComponent<TMP_InputField>().text;
+            networkedGameLogic.SendQuestionToMaster(question);
         }
     }
 

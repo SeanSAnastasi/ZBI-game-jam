@@ -161,7 +161,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
         if (activePlayers.Length <= prompts.Count)
         {
             PhotonView photonView = PhotonView.Get(this);
-            photonView.RPC("SyncQuestions", RpcTarget.All, questions);
+            photonView.RPC("SynqPrompts", RpcTarget.All, questions);
         }
     }
 
