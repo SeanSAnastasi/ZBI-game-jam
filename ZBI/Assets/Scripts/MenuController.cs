@@ -47,14 +47,11 @@ public class MenuController : MonoBehaviour
 
         entryScreen.SetActive(false);
         loginScreen.SetActive(false);
-
         lobbyScreen.SetActive(true);
 
         GameObject startButton = GameObject.Find("Start Button");
         if (PhotonNetwork.IsMasterClient) startButton.SetActive(true);
         else startButton.SetActive(false);
-
-        UpdatePlayerList(networkManager.Players);
     }
 
     public void ExitLobby()

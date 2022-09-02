@@ -1193,6 +1193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 773144843}
   - component: {fileID: 773144844}
+  - component: {fileID: 773144845}
   m_Layer: 0
   m_Name: Vertical Player Group
   m_TagString: Untagged
@@ -1246,6 +1247,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &773144845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 773144842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26e7e7a82618d644b2e35da226df002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &846091276
 GameObject:
   m_ObjectHideFlags: 0

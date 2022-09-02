@@ -67,7 +67,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log("Entered room");
+        Debug.Log(newPlayer.NickName);
         FindObjectOfType<MenuController>().UpdatePlayerList(PhotonNetwork.PlayerList);
     }
 
