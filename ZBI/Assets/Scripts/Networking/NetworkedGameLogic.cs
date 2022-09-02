@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 {
@@ -24,6 +25,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
     public Dictionary<string, int> Scores;
 
     public static NetworkedGameLogic Instance { get; private set; }
+    public string puppyUrl = "https://i.pinimg.com/originals/c1/81/dc/c181dc51de2b255351e639bff4c3ebec.jpg";
 
     private GameLogic gameLogic;
 
@@ -112,12 +114,13 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
 
     }
 
-    private void Download(string url, Player player)
+    private void Download(string url, Player player, Image image)
     {
-        StartCoroutine(LoadFromWeb(url, player));
+
+        StartCoroutine(LoadFromWeb(puppyUrl, player, image));
     }
 
-    IEnumerator LoadFromWeb(string url, Player player)
+    IEnumerator LoadFromWeb(string url, Player player, Image image)
     {
         UnityWebRequest wr = new UnityWebRequest(url);
         DownloadHandlerTexture texDl = new DownloadHandlerTexture(true);
@@ -128,7 +131,7 @@ public class NetworkedGameLogic : PunSingleton<NetworkedGameLogic>
             Texture2D t = texDl.texture;
             Sprite sprite = Sprite.Create(t, new Rect(0, 0, t.width, t.height),
                 Vector2.zero, 1f);
-
+            image.sprite = sprite;
             GeneratedSprites.Add(player.NickName, sprite);
         }
     }
